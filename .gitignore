@@ -1,0 +1,9 @@
+config.xml
+hooks
+node_modules
+package-lock.json
+package.json
+platforms
+plugins
+res
+www

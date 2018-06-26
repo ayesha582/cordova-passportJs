@@ -28,20 +28,20 @@ var app = {
             // $.get("http://127.0.0.1:4500/api/v1/auth/facebook", function(data, status){
             //     alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
             // }); 
+             var email = $(".email").val();
+             var password = $(".password").val()
 
             $.ajax({
-                url: "http://127.0.0.1:4500/api/v1/auth/facebook",
-                type: "GET",
-                crossDomain: true,
-                dataType: 'jsonp',
-                contentType: "application/json; charset=utf-8",
+                url: "https://started-from-the-bottom.herokuapp.com/api/v1/auth/login",
+                type: "POST",
+                data:{email,password},
+                dataType: 'json',
             }).done(function (response, textStatus, jqXHR) {
-                alert(JSON.stringify(response));
+                $("#user").html(JSON.stringify(response));
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 alert(JSON.stringify(errorThrown));
             })
-            // var email = $(".email").val();
-            // var password = $(".password").val();
+            
             // alert(`attempt to login ${email} with password ${password}`);
         }
         // document.querySelector('button').addEventListener('click', this.clickHandler.bind(this), false);

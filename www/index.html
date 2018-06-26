@@ -29,7 +29,8 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; frame-src *; img-src *">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://medium.com https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; frame-src *; img-src *"> -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; "> -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
     <meta name="format-detection" content="telephone=no">
@@ -41,71 +42,18 @@
 </head>
 
 <body>
+    Verifying connectivity..
+    <a id="bkpLink" href="https://medium.com">www.instarem.com</a>
+
     <div class="app">
         <h1>Apache Cordova</h1>
         <div id="deviceready" class="blink">
-            <p class="event listening">Login to continue</p>
-            <input class='email' placeholder="Enter email" />
-            <input class='password' type="password" placeholder="Enter password" />
-            <button class="btn-submit">login</button>
-            <a href="https://www.google.com">google</a>
+            <p class="event listening">Connecting to Device</p>
+            <p class="event received">Device is Ready</p>
         </div>
     </div>
-    <script src="lib/jquery.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
-    <script>
-        function statusChangeCallback(response) {
-            console.log('statusChangeCallback');
-            console.log(response);
-            if (response.status === 'connected') {
-                testAPI();
-            } else {
-                document.getElementById('status').innerHTML = 'Please log ' +
-                    'into this app.';
-            }
-        }
-        function checkLoginState() {
-            FB.getLoginStatus(function (response) {
-                statusChangeCallback(response);
-            });
-        }
-
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: '982290168610488',
-                cookie: true,
-                xfbml: true,  // parse social plugins on this page
-                version: 'v2.8' // use graph api version 2.8
-            });
-
-            FB.getLoginStatus(function (response) {
-                statusChangeCallback(response);
-            });
-
-        };
-
-        // Load the SDK asynchronously
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-        function testAPI() {
-            console.log('Welcome!  Fetching your information.... ');
-            FB.api('/me', function (response) {
-                console.log('Successful login for: ' + response.name);
-                document.getElementById('status').innerHTML =
-                    'Thanks for logging in, ' + response.name + '!';
-            });
-        }
-    </script>
-    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-    </fb:login-button>
-
-    <div id="status">
-    </div>
 </body>
+
 </html>

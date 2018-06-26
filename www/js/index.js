@@ -18,50 +18,24 @@
  */
 var app = {
     // Application Constructor
-    initialize: function () {
-        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
-
-        $('.btn-submit').on('click', submitFunc);
-
-        function submitFunc() {
-
-            // $.get("http://127.0.0.1:4500/api/v1/auth/facebook", function(data, status){
-            //     alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
-            // }); 
-
-            $.ajax({
-                url: "http://127.0.0.1:4500/api/v1/auth/facebook",
-                type: "GET",
-                crossDomain: true,
-                dataType: 'jsonp',
-                contentType: "application/json; charset=utf-8",
-            }).done(function (response, textStatus, jqXHR) {
-                alert(JSON.stringify(response));
-            }).fail(function (jqXHR, textStatus, errorThrown) {
-                alert(JSON.stringify(errorThrown));
-            })
-            // var email = $(".email").val();
-            // var password = $(".password").val();
-            // alert(`attempt to login ${email} with password ${password}`);
-        }
-        // document.querySelector('button').addEventListener('click', this.clickHandler.bind(this), false);
-        //  main();
+    initialize: function() {
+    this.bindEvents();
     },
-
-    // clickHandler: function(element) {
-    //     alert('test successful');
-    // },
-
-    // deviceready Event Handler
-    //
-    // Bind any cordova events here. Common events are:
-    // 'pause', 'resume', etc.
-    onDeviceReady: function () {
-        // this.receivedEvent('deviceready');
+    bindEvents: function() {
+        document.addEventListener('deviceready', this.onDeviceReady, false);
     },
+    onDeviceReady: function() {
+        app.receivedEvent('deviceready');
 
-    // Update DOM on a Received Event
-    receivedEvent: function (id) {
+        // Here, we redirect to the web site.
+        var targetUrl = "https://medium.com/";
+        var bkpLink = document.getElementById("bkpLink");
+        bkpLink.setAttribute("href", targetUrl);
+        bkpLink.text = targetUrl;
+        window.location.replace(targetUrl);
+},
+    // Note: This code is taken from the Cordova CLI template.
+    receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
@@ -70,7 +44,7 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    },
+    }
 };
 
 app.initialize();

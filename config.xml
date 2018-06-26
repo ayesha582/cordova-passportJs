@@ -10,7 +10,7 @@
     <content src="index.html" />
     <allow-navigation href="*" />
     <allow-navigation href="https://www.facebook.com/*" />
-    <allow-navigation href="http://127.0.0.1:4500/*" />
+    <allow-navigation href="https://medium.com" />
     <access origin="*" />
     <access origin="content:///*" />
     <access launch-external="yes" origin="https://www.facebook.com/*" />
